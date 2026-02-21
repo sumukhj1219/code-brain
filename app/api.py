@@ -89,17 +89,6 @@ class StatusResponse(BaseModel):
     status: str
 
 
-# @fastapi_app.post("/files", response_model=ResearchResponse)
-# async def files(request: ResearchRequest) -> ResearchResponse:
-#     codebase = Codebase.from_repo(request.repo_name)
-
-#     file_index = FileIndex(codebase)
-#     file_index.create()
-
-#     similar_files = file_index.similarity_search(request.query, k=5)
-
-#     similar_file_names = [file.filepath for file, score in similar_files]
-#     return FilesResponse(files=similar_file_names)
 
 
 @fastapi_app.post("/research", response_model=ResearchResponse)
