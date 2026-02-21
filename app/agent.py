@@ -9,10 +9,8 @@ load_dotenv()
 async def entrypoint(ctx: JobContext):
     model = groq.LLM(model="llama-3.3-70b-versatile")
     
-    # 1. Initialize the context
     chat_ctx = llm.ChatContext()
     
-    # 2. Add the system message to the .messages list
     chat_ctx.messages.append(
         llm.ChatMessage(
             role="system",
@@ -30,12 +28,10 @@ async def entrypoint(ctx: JobContext):
             if user_text.lower() in ["exit", "quit"]:
                 break
 
-            # 3. Append user message
             chat_ctx.messages.append(
                 llm.ChatMessage(role="user", content=user_text)
             )
 
-            # 4. Generate streaming response
             stream = model.chat(chat_ctx=chat_ctx)
             print("Assistant: ", end="", flush=True)
             
@@ -48,7 +44,6 @@ async def entrypoint(ctx: JobContext):
             
             print("\n")
             
-            # 5. Append assistant response back to the context
             chat_ctx.messages.append(
                 llm.ChatMessage(role="assistant", content=full_response)
             )
